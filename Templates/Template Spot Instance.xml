@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-03-10T02:51:48Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Spotinst Instance</template>
+            <name>Template Spotinst Instance</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>AWS/SPOT</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Custo atual ({$INSTANCE_ID})</name>
+                    <type>EXTERNAL</type>
+                    <key>spotInstance.sh[&quot;{$INSTANCE_ID}&quot;,&quot;.costs.actual&quot;]</key>
+                    <value_type>FLOAT</value_type>
+                    <units>$</units>
+                    <applications>
+                        <application>
+                            <name>AWS/SPOT</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Custo potencial ({$INSTANCE_ID})</name>
+                    <type>EXTERNAL</type>
+                    <key>spotInstance.sh[&quot;{$INSTANCE_ID}&quot;,&quot;.costs.potential&quot;]</key>
+                    <value_type>FLOAT</value_type>
+                    <units>$</units>
+                    <applications>
+                        <application>
+                            <name>AWS/SPOT</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Horas de uso ({$INSTANCE_ID})</name>
+                    <type>EXTERNAL</type>
+                    <key>spotInstance.sh[&quot;{$INSTANCE_ID}&quot;,&quot;.running.value&quot;]</key>
+                    <value_type>FLOAT</value_type>
+                    <units>h</units>
+                    <applications>
+                        <application>
+                            <name>AWS/SPOT</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Percentual de economia ({$INSTANCE_ID})</name>
+                    <type>EXTERNAL</type>
+                    <key>spotInstance.sh[&quot;{$INSTANCE_ID}&quot;,&quot;.savings.value&quot;]</key>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>AWS/SPOT</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>Custo instancia {$INSTANCE_ID}</name>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>0F0F0F</color>
+                    <item>
+                        <host>Template Spotinst Instance</host>
+                        <key>spotInstance.sh[&quot;{$INSTANCE_ID}&quot;,&quot;.costs.actual&quot;]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>F63100</color>
+                    <item>
+                        <host>Template Spotinst Instance</host>
+                        <key>spotInstance.sh[&quot;{$INSTANCE_ID}&quot;,&quot;.costs.potential&quot;]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2E7D32</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>Template Spotinst Instance</host>
+                        <key>spotInstance.sh[&quot;{$INSTANCE_ID}&quot;,&quot;.savings.value&quot;]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

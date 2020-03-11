@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-03-10T02:51:17Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template AWS Spotinst</template>
+            <name>Template AWS Spotinst</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>AWS</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Custo atual da conta</name>
+                    <key>contaAWS[&quot;actualCosts&quot;]</key>
+                    <trends>0</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>$</units>
+                    <applications>
+                        <application>
+                            <name>AWS</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>O que eu gastaria</name>
+                    <key>contaAWS[&quot;potentialCosts&quot;]</key>
+                    <trends>0</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>$</units>
+                    <applications>
+                        <application>
+                            <name>AWS</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Utilização conta AWS em horas</name>
+                    <key>contaAWS[&quot;runningHours&quot;]</key>
+                    <trends>0</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>h</units>
+                    <applications>
+                        <application>
+                            <name>AWS</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Economia (%)</name>
+                    <key>contaAWS[&quot;savingsPercentage&quot;]</key>
+                    <trends>0</trends>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>AWS</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>LLD tipos EC2</name>
+                    <key>discovery.type</key>
+                    <lifetime>3d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Valor máximo preço SPOT {#TYPE_EC2}</name>
+                            <key>SpotCostHistory[&quot;{#TYPE_EC2}&quot;]</key>
+                            <value_type>FLOAT</value_type>
+                            <units>$</units>
+                            <applications>
+                                <application>
+                                    <name>AWS</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>Custo conta AWS via Spotinst</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template AWS Spotinst</host>
+                        <key>contaAWS[&quot;actualCosts&quot;]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>DOTTED_LINE</drawtype>
+                    <color>0F0F0F</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>Template AWS Spotinst</host>
+                        <key>contaAWS[&quot;savingsPercentage&quot;]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>B71C1C</color>
+                    <item>
+                        <host>Template AWS Spotinst</host>
+                        <key>contaAWS[&quot;potentialCosts&quot;]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
